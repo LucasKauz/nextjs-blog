@@ -4,15 +4,21 @@ import matter from 'gray-matter'
 import remark from 'remark'
 import html from 'remark-html'
 
+interface PostAdditionalData {
+    date: string;
+    title: string;
+}
+
 const postsDirectory = path.join(process.cwd(), 'posts')
 
 function removeMd (string) {
     return string.replace(/\.md$/, '')
 }
 
+
 export function getSortedPostsData() {
     const fileNames = fs.readdirSync(postsDirectory)
-    const allPostsData = fileNames.map(fileName => {
+    const allPostsData = fileNames.map((fileName: string) => {
         const id = removeMd(fileName)
         const fullPath = path.join(postsDirectory, fileName)
         const fileContents = fs.readFileSync(fullPath, 'utf8')
@@ -21,7 +27,7 @@ export function getSortedPostsData() {
 
         return {
             id,
-            ...matterResult.data
+            ...(matterResult.data as PostAdditionalData)
         }
     })
 
@@ -57,6 +63,6 @@ export async function getPostData(id) {
     return {
         id,
         contentHtml,
-        ...matterResult.data
+        ...(matterResult.data as PostAdditionalData)
     }
 }

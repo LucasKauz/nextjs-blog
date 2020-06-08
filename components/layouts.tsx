@@ -7,7 +7,12 @@ import utilStyles from '../styles/utils.module.css'
 const name = 'Lucas Marques'
 export const siteTitle = 'Next.js Sample Website'
 
-function Layout({ children, home }) {
+interface Props {
+    children: React.ReactNode;
+    home?: boolean;
+}
+
+function Layout({ children, home }: Props) {
     return (
         <div className={styles.container}>
             <Head>
