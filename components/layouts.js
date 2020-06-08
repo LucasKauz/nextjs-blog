@@ -56,7 +56,7 @@ function Layout({ children, home }) {
             </header>
             <main>{ children }</main>
             {!home && (
-                <div className={StyleSheet.backToHome}>
+                <div className={styles.backToHome}>
                     <Link href="/">
                         <a>← Back to home</a>
                     </Link>
